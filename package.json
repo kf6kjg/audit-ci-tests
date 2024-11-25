@@ -1,0 +1,22 @@
+{
+  "name": "audit-ci-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx audit-ci@^7.1.0 --moderate --report-type summary --config ./.audit-ci.jsonc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kf6kjg/audit-ci-tests.git"
+  },
+  "author": "Ricky Curtice",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kf6kjg/audit-ci-tests/issues"
+  },
+  "homepage": "https://github.com/kf6kjg/audit-ci-tests#readme",
+  "devDependencies": {
+    "postcss-image-set-function": "3.0.1"
+  }
+}

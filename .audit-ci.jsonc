@@ -1,0 +1,6 @@
+{
+  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
+  "allowlist": [
+    "GHSA-7fh5-64p2-3v2j|postcss-image-set-function>postcss",
+  ],
+}

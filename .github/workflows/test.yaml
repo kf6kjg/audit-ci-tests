@@ -1,0 +1,58 @@
+name: Test audit
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+concurrency:
+  group: ${{ github.workflow }}_${{ github.ref }}
+  cancel-in-progress: true
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+defaults:
+  run:
+    shell: bash
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+env:
+  LOG_MIN_LEVEL: fatal
+  NODE_ENV: test
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+on:
+  push:
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+permissions:
+  actions: read
+  packages: read
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+jobs:
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  test:
+    permissions:
+      contents: read
+      packages: read
+
+    runs-on: ubuntu-latest
+
+    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            package.json
+            package-lock.json
+
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: 20
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Run audit
+        run: |
+          npx audit-ci@^7 \
+            --moderate \
+            --report-type summary \
+            --config ./.audit-ci.jsonc \
+          ;
