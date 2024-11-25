@@ -17,6 +17,5 @@
   },
   "homepage": "https://github.com/kf6kjg/audit-ci-tests#readme",
   "devDependencies": {
-    "postcss-image-set-function": "3.0.1"
   }
 }
